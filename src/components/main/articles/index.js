@@ -4,15 +4,32 @@
   ****
 */
 
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Article from '~c/main/article';
+import actions from '~s/actions';
 
-const Articles = ({data, categories, size, category, container}) => {
+const Articles = props => {
+  
+  useEffect(() => {
+    if (props.articles_status === null) {
+      props.loadArticles();
+    } else if (props.categories_status === null) {
+      props.loadCategories();
+    }
+  });
 
-  if (!data.length) return null  
+  if (!props.articles_status && props.categories_status) return null;
 
-  let articles = data.map(article => {
+
+  /* ###  INIT END ### */
+  
+
+  const {articles, categories, size, category, container} = props;
+
+  if (!articles.length) return null  ;
+
+  let articlesGrid = articles.map(article => {
 
     let [categoryName] = categories.filter(el => el.id == article.categoryId);
     article.category = categoryName ? categoryName.href : 'all';
@@ -26,10 +43,10 @@ const Articles = ({data, categories, size, category, container}) => {
     }
   });
 
-  let count = articles.filter(el => el).length;
+  let count = articlesGrid.filter(el => el).length;
 
   if (!count) {
-    articles = <div>В данной рубрике пока нет статей!</div>
+    articlesGrid = <div>В данной рубрике пока нет статей!</div>
   }
 
   if (container) {
@@ -37,7 +54,7 @@ const Articles = ({data, categories, size, category, container}) => {
       <div className="articles">
         <div className="container">
           <div className="row">
-            {articles}
+            {articlesGrid}
           </div>
         </div>
       </div>
@@ -55,9 +72,18 @@ const Articles = ({data, categories, size, category, container}) => {
 
 function mapStateToProps(state) {
   return {
-    data: state.articles.articles,
-    categories: state.categories.categories
+    articles: state.articles.articles,
+    categories: state.categories.categories,
+    articles_status: state.articles.status,
+    categories_status: state.categories.status
   }
 }
 
-export default connect(mapStateToProps, null)(Articles);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadArticles: () => dispatch(actions.articles.loadArticles()),    
+    loadCategories: () => dispatch(actions.categories.loadCategories()),  
+  }  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);

@@ -2,7 +2,7 @@ import constants from '~s/constants';
 
 let initialState = {
   data: {},
-  status: false
+  status: null
 }
 
 let NAMES = constants.banner;

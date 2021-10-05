@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { connect } from 'react-redux';
+import actions from '~s/actions';
 
 const Banner = props => {
 
-  let {title, subtitle, img, ...other} = props.data;
+  useEffect(() => {
+    if (props.status === null) {
+      props.loadBanner()
+    }  
+  });
 
+  if (!props.status) return null;
+
+  let {title, subtitle, img, ...other} = props.data;
 
   return (
     <div className="banner">
@@ -22,4 +31,18 @@ const Banner = props => {
   )
 }
 
-export default Banner;
+function mapStateToProps(state) {
+  return {
+    data: state.banner.data,
+    status: state.banner.status
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadBanner: status => dispatch(actions.banner.loadBanner(status)),
+  }
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

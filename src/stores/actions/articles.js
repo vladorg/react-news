@@ -5,9 +5,7 @@ import * as API from '~/api';
 let NAMES = constants.articles;
 
 
-export const loadArticles = (status) => {
-  if (status) return {type: null}
-  
+export const loadArticles = () => { 
   return dispatch => {
     return new Promise((res, rej) => {
       getArticles()

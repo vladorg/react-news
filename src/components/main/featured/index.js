@@ -1,13 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {setUrl} from '~r';
+import { connect } from "react-redux";
+import actions from '~s/actions';
 
 const Featured = props => {
+
+  
+
+  useEffect(() => {
+    if (props.articles_status === null) {
+      props.loadArticles();
+    }
+  });
+
+  if (!props.articles_status) return null;
+
+
+  /* ###  INIT END ### */
+
 
   let featured_id;
   let article;
 
-  props.data.map((el, i) => {
+  props.articles.map((el, i) => {
     if (el.featured) {
       if (!featured_id) {
         featured_id = Infinity;
@@ -18,7 +34,7 @@ const Featured = props => {
   });
 
   if (featured_id) {
-    article = props.data.map(item => {
+    article = props.articles.map(item => {
       if (item.id == featured_id) {
         const url = setUrl('article', {category: item.category, name: item.href});
         const {id, title, preview, date, img} = item;
@@ -60,4 +76,17 @@ const Featured = props => {
   )
 }
 
-export default Featured;
+function mapStateToProps(state) {
+  return {
+    articles: state.articles.articles,
+    articles_status: state.articles.status,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadArticles: () => dispatch(actions.articles.loadArticles()),
+  }  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Featured);

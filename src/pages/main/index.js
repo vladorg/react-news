@@ -11,27 +11,21 @@ import Articles from '~c/main/articles';
 import Featured from '~c/main/featured';
 import { connect } from "react-redux";
 
-const Main = ({banner, articles}) => {
+const Main = () => {
 
   return (
     <div className="content content--main">
-      <Banner data={banner}/>
-      <Latest data={articles}/>
-      <Articles data={articles} category="all" size={3} container={true}/>
-      <Featured data={articles}/>
+      <Banner/>
+      {/* <Latest data={articles}/> */}
+      <Articles category="all" size={3} container={true}/>
+      <Featured/>
     </div>
   )
 }
 
 
 function mapStateToProps(state) {
-
-
-  console.log(state);
-  return {
-    articles: state.articles.articles,
-    banner: state.banner.data
-  }
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {

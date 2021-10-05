@@ -13,23 +13,14 @@ import * as API from '~/api';
 
 const App = props => {
 
-  const [ready, setReady] = useState(null);
-
   useEffect(() => {
-    if (ready === null) {
-      Promise.all([
-        props.loadData(props.main_status),
-        props.loadBanner(props.banner_status),        
-        props.loadArticles(props.articles_status),
-        props.loadCategories(props.categories_status)
-      ])
-        .then(() => setReady(true))
-        .catch(() => setReady(false))
+    if (props.status === null) {
+      props.loadData()
     }  
   });
 
-  if (ready === null) return <Loader/>
-  if (ready === false) return <ErrorLoad/>  
+  if (props.status === null) return <Loader/>
+  if (props.status === false) return <ErrorLoad/>  
 
   return (
     <Router>
@@ -52,8 +43,7 @@ const App = props => {
 function mapStateToProps(state) {
   return {
     main: state.app.data,
-    main_status: state.app.status,
-    banner_status: state.banner.status,
+    status: state.app.status,
     articles_status: state.articles.status,
     categories_status: state.categories.status,
   }
@@ -61,12 +51,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadData: status => dispatch(actions.app.loadData(status)),
-    loadBanner: status => dispatch(actions.banner.loadBanner(status)),
+    loadData: () => dispatch(actions.app.loadData()),
     loadArticles: status => dispatch(actions.articles.loadArticles(status)),    
     loadCategories: status => dispatch(actions.categories.loadCategories(status)),  
-  }
-  
+  }  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

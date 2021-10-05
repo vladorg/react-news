@@ -2,7 +2,7 @@ import constants from '~s/constants';
 
 let initialState = {
   articles: [],
-  status: false
+  status: null
 }
 
 let NAMES = constants.articles;

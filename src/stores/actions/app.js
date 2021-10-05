@@ -3,9 +3,7 @@ import * as API from '~/api';
 
 let NAMES = constants.app;
 
-export const loadData = status => {
-  if (status) return {type: null}
-  
+export const loadData = () => {  
   return dispatch => {
     return new Promise((res, rej) => {
       getData()

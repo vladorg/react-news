@@ -2,7 +2,7 @@ import constants from '~s/constants';
 
 let initialState = {
   categories: [],
-  status: false
+  status: null
 }
 
 let NAMES = constants.categories;
