@@ -1,0 +1,1 @@
+export const BANNER_LOAD = 'BANNER_LOAD';
