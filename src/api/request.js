@@ -1,8 +1,4 @@
 export default function(url, params = {}) {
-  
-  console.log('=======');
-  console.log(`fetch request on url: ${url}`);
-  console.log('=======');
 
   return fetch(url, params)
           .then(response => {

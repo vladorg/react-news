@@ -1,41 +1,72 @@
-import React from "react";
-import {useSelector} from 'react-redux';
-import { Link } from "react-router-dom";
+/* 
+  ****
+  Post page container
+  ****
+*/
+
+import React, {useEffect} from "react";
+import { connect } from "react-redux";
+import parse from "html-react-parser";
+
 import {setUrl} from '~r';
+import actions from '~s/actions';
+import View from './view';
+
 
 const Article = props => {
-  
-  const articles = useSelector(state => state.articles.articles);
-  const item = articles.filter(article => article.href == props.match.params.name);
 
-  if (!item.length) return 404
+  const slug = props.match.params.name;
 
-  const {title, preview, content, contentP, img, href, date, category} = item[0];
-  const url = setUrl('category', {category});
+  useEffect(() => {    
+    if (props.post_status === null) {
+      props.load(slug);
+      console.log('post was loaded');
+    }
+    if (props.categories_status === null) {
+      props.loadCategories();
+    }
+    return () => {
+      props.clear();
+    }
+  }, []);
 
+  if (props.post_status === null || props.categories_status === null) return 'loading...' ;
+  if (!props.post.id) return 'not found';
 
-  return (
-    <div className="container">
-      <div className="content">
-        <h1>{title}</h1>
-        <div className="intro d-flex align-items-center">
-          <div className="date me-2">{date}</div>
-          <div className="category">, Category: {category}</div>
-        </div>
-        <hr/>
-        <div className="image">
-          <img className="w-100 mt-2" src={img} alt="" />
-        </div>
-        <div className="content">
-          {content}
-        </div>
-        <hr/>
-        <Link className="btn btn-primary" to={url}>Back to category</Link>
-        
-      </div>
-    </div>
-  )
+  const POST = props.post;
+  const [category] = props.categories.filter(el => el.id == POST.categories[0]);
+  const img = POST._embedded['wp:featuredmedia'] ? POST._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
+  const content = parse(POST.content.rendered);
+  const url = setUrl('category', {category: category.href});
+
+  const data = {
+    title: POST.title.rendered,
+    date: POST.date,
+    category: category.placeholder,
+    image: img,
+    content,
+    back: url
+  }
+
+  return <View data={data}/>
 }
 
 
-export default Article;
+function mapStateToProps(state) {
+  return {
+    post: state.post.post,
+    post_status: state.post.status,
+    categories: state.categories.categories,
+    categories_status: state.categories.status
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    load: slug => dispatch(actions.post.loadPost(slug)),
+    clear: () => dispatch(actions.post.clearPost()),
+    loadCategories: () => dispatch(actions.categories.loadCategories()), 
+  }  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Article);

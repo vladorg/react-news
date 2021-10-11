@@ -30,19 +30,19 @@ export const loadCategories = (status) => {
 }
 
 
-function getCategories() {
-  return [
-    {
-      href: 'sport',
-      placeholder: 'Спорт'
-    },
-    {
-      href: 'health',
-      placeholder: 'Здоровье'
-    },
-    {
-      href: 'science',
-      placeholder: 'Наука'
-    }
-  ]
-}
+// function getCategories() {
+//   return [
+//     {
+//       href: 'sport',
+//       placeholder: 'Спорт'
+//     },
+//     {
+//       href: 'health',
+//       placeholder: 'Здоровье'
+//     },
+//     {
+//       href: 'science',
+//       placeholder: 'Наука'
+//     }
+//   ]
+// }

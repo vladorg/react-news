@@ -28,7 +28,7 @@ async function getArticles() {
 
     let articles = data.map(item => {
       const img = item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
-      let content = parse(item.content.rendered);
+      const content = parse(item.content.rendered);
 
       return {
         id: item.id,
@@ -40,7 +40,7 @@ async function getArticles() {
         date: item.date_gmt,
         featured: true,
         latest: false,
-        category: null,
+        //category: null,
         categoryId: item.categories[0] || null
       }
     });

@@ -7,7 +7,7 @@
 import React from "react";
 import Banner from '~c/main/banner';
 import Latest from '~c/main/latest';
-import Articles from '~c/main/articles';
+import Posts from '~c/main/posts/list';
 import Featured from '~c/main/featured';
 import { connect } from "react-redux";
 
@@ -16,8 +16,7 @@ const Main = () => {
   return (
     <div className="content content--main">
       <Banner/>
-      {/* <Latest data={articles}/> */}
-      <Articles category="all" size={3} container={true}/>
+      {/* <Articles category="all" size={3} container={true}/> */}
       <Featured/>
     </div>
   )

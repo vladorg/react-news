@@ -25,7 +25,7 @@ const App = props => {
   return (
     <Router>
 
-      <button onClick={() => API.getMedia(23)}>get</button>
+      <button onClick={() => API.get()}>get</button>
 
       <Header data={props.main}/>
 
