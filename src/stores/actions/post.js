@@ -36,7 +36,7 @@ export const clearPost = () => {
 
 async function load(slug) {
   try {
-    const data = await API.getPost(slug);
+    const data = await API.getPostByName(slug);
 
     return data;
   } catch(e) {

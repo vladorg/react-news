@@ -1,0 +1,3 @@
+export const POSTS_LOAD = 'POSTS_LOAD';
+export const POSTS_BY_CATNAME_LOAD = 'POSTS_BY_CATNAME_LOAD';
+export const POSTS_CLEAR = 'POSTS_CLEAR';

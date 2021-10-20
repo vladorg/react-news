@@ -1,49 +1,69 @@
 /* 
   ****
-  Blog page container
+  Blog page container component
   ****
 */
 
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 
 import actions from '~s/actions';
-import Posts from '~c/main/posts/list';
-import Categories from "~c/ui/categories";
+import Posts from '~c/main/posts/list/index';
+import Blog from "./Blog.jsx";
 
-const Blog = props => {
+const BlogContainer = props => {
 
   const slug = props.match.params.category || 'all';
+
+
+  /* ## INIT ## */
+
+  useEffect(() => {
+    let [category] = props.categories.filter(el => el.href == slug);
+
+    if (props.posts_status) props.postsClear();
+    props.loadPosts(category.id != 1 ? category.id : null);   
+  }, [slug]);  
+
+  /* ## INIT END ## */
+  
+
+
+  let [category] = props.categories.filter(el => el.href == slug);
+  let heading = category.placeholder;
   
   return (
-    <div className="container">
-      <div className="content content--all">
-        <h1 className="mb-4">{slug}</h1>
-        <div className="row">
-          <div className="col-9">
-            <Posts category={slug} size={4} container={false}/>
-          </div>
-          <div className="col-3">
-            <Categories/>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <Blog heading={heading}>
+        {
+          props.posts_status === null
+          ? 'loading posts...'
+          : <Posts posts={props.posts} size={4} container={false}/>
+        }
+      </Blog>
+    </>
   )
 }
 
-/* ****** */
+
+
+
+
+// ***** Redux
 
 function mapStateToProps(state) {
   return {
-    //categories: state.categories.categories
+    posts: state.posts.posts,
+    posts_status: state.posts.status,
+    categories: state.categories.categories
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    //loadArticles: () => dispatch(actions.articles.loadArticles())
+    loadPosts: id => dispatch(actions.posts.loadPostsByCategory(id)),
+    postsClear: () => dispatch(actions.posts.clear()), 
   }  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Blog);
+export default connect(mapStateToProps, mapDispatchToProps)(BlogContainer);

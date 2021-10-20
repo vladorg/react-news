@@ -1,27 +1,26 @@
 import constants from '~s/constants';
 
 let initialState = {
-  articles: [],
+  data: {},
   status: null
 }
 
-let NAMES = constants.articles;
+let NAMES = constants.app;
+
 
 
 export default function(state = initialState, action) {
-  
   switch(action.type) {
-    case NAMES.ARTICLES_LOAD: // articles (array)
+    case NAMES.APP_LOAD: // data, status
+      let data = action.data || {};
+      let status = action.status || null;
+
       return {
         ...state,
-        status: action.status,
-        articles: [...action.articles]
+        data,
+        status
       }
     default:
       return state;
   }
-
-  return state;
-
-
 }

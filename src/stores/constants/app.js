@@ -1,2 +1,3 @@
 export const APP_LOAD = 'APP_LOAD';
 export const CATEGORIES_LOAD = 'CATEGORIES_LOAD';
+export const GET_CURRENT_CATEGORY = 'GET_CURRENT_CATEGORY';

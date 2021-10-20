@@ -7,17 +7,22 @@ import actions from '~s/actions';
 
 const Categories = props => {
 
-  useEffect(() => {
-    if (props.categories_status === null) {
-      props.loadCategories();
-    }
-  });
+  if (!props.default) {
+    useEffect(() => {
+      if (props.categories_status === null) {
+        props.loadCategories();
+      }
+    });
 
-  if (!props.categories_status) return 'loading...';
+    if (!props.categories_status) return 'loading...';
+  } else {
+    console.log('using is default data, without api load');
+  }
 
-  const wall = props.categories.map((item, i) => {
-    let url = setUrl('category', {category: item.href});
-    if (item.href == 'all') url = routesMap.blog;
+  const categories = props.default || props.categories;
+  const wall = categories.map((category, i) => {
+    let url = setUrl('category', {category: category.href});
+    if (category.href == 'all') url = routesMap.blog;
 
     return (
       <NavLink 
@@ -27,7 +32,7 @@ const Categories = props => {
         className="list-group-item list-group-item-action" 
         exact
       >
-        {item.placeholder}
+        {category.placeholder}
       </NavLink>
     )
     

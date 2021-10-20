@@ -1,21 +1,21 @@
 import constants from '~s/constants';
 
 let initialState = {
-  data: {},
+  post: {},
   status: null
 }
 
-let NAMES = constants.app;
-
+let NAMES = constants.top_article;
 
 
 export default function(state = initialState, action) {
+  
   switch(action.type) {
-    case NAMES.APP_LOAD: // data 
+    case NAMES.TOP_ARTICLE_LOAD: // data
       return {
         ...state,
-        data: {...action.data},
-        status: action.status
+        status: action.status,
+        post: {...action.data}
       }
     default:
       return state;

@@ -1,0 +1,1 @@
+export const TOP_ARTICLE_LOAD = 'TOP_ARTICLE_LOAD';

@@ -1,11 +1,22 @@
 {
-  "name": "react-calculator",
+  "name": "react-blog",
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src$1",
+      "^~c(.*)$": "<rootDir>/src/components$1",
+      "^~s(.*)$": "<rootDir>/src/stores$1",
+      "^~p(.*)$": "<rootDir>/src/pages$1",
+      "^~r(.*)$": "<rootDir>/src/router$1"
+    }
+  },
   "version": "1.0.0",
   "description": "this is a my second react app",
   "main": "index.js",
   "scripts": {
     "d": "webpack-dev-server --mode development --open",
-    "b": "webpack --mode production"
+    "b": "webpack --mode production",
+    "t": "jest --env=jsdom"
   },
   "author": "",
   "license": "ISC",
@@ -26,10 +37,13 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.4.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
     "autoprefixer": "^9.7.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.0.0",
     "file-loader": "^6.2.0",
+    "jest": "^27.3.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^4.0.2",

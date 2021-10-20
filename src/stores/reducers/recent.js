@@ -1,21 +1,21 @@
 import constants from '~s/constants';
 
 let initialState = {
-  data: {},
+  posts: [],
   status: null
 }
 
-let NAMES = constants.banner;
-
+let NAMES = constants.recent;
 
 
 export default function(state = initialState, action) {
+  
   switch(action.type) {
-    case NAMES.BANNER_LOAD: // data   
+    case NAMES.RECENT_LOAD: // data
       return {
         ...state,
         status: action.status,
-        data: {...action.data}
+        posts: [...action.data]
       }
     default:
       return state;

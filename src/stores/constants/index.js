@@ -1,13 +1,17 @@
-import * as articles from './articles';
+import * as posts from './posts';
 import * as banner from './banner';
 import * as app from './app';
 import * as categories from './categories';
 import * as post from './post';
+import * as top_article from './top_article';
+import * as recent from './recent';
 
 export default {
-  articles,
+  posts,
   banner,
   app,
   categories,
-  post
+  post,
+  top_article,
+  recent
 }

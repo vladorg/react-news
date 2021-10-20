@@ -1,7 +1,8 @@
 import React from 'react';
+
 import Home from '~p/main';
 import Blog from '~p/blog';
-import Article from '~p/article';
+import Post from '~p/post';
 import E404 from '~p/404';
 
 const ROOT = '/';
@@ -27,9 +28,9 @@ const routes = [
     exact: true,
   },
   {
-    name: 'article',
+    name: 'post',
     path: `${ROOT}blog/:category/:name`,
-    component: Article,
+    component: Post,
     exact: true,
   },
 

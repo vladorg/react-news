@@ -1,14 +1,13 @@
 /* 
   ****
-  Post page view
+  Post page presentation component
   ****
 */
 
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function(props) {
-  const {title, date, category, image, content, back, ...other} = props.data;
+const Post = ({title, date, category, img, content, url}) => {
 
   return (
     <div className="container">
@@ -20,14 +19,16 @@ export default function(props) {
         </div>
         <hr/>
         <div className="image">
-          <img className="w-100 mt-2" src={image} alt="" />
+          <img className="w-100 mt-2" src={img} alt="" />
         </div>
         <div className="content">
           {content}
         </div>
         <hr/>
-        <Link className="btn btn-primary" to={back}>Back to category</Link>        
+        <Link className="btn btn-primary" to={url}>Back to category</Link>        
       </div>
     </div>
   )
 }
+
+export default Post;

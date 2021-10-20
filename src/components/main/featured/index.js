@@ -1,92 +1,66 @@
+/* 
+  ****
+  Featured post container component
+  ****
+*/
+
 import React, {useEffect} from "react";
-import {Link} from 'react-router-dom';
-import {setUrl} from '~r';
 import { connect } from "react-redux";
+import parse from "html-react-parser";
+
+import {setUrl} from '~r';
 import actions from '~s/actions';
+import Featured from './Featured.jsx';
 
-const Featured = props => {
+const FeaturedContainer = props => {  
 
-  
+  // ##### INIT
+
+  if (!props.id) return null;
 
   useEffect(() => {
-    if (props.articles_status === null) {
-      props.loadArticles();
+    if (props.post_status === null) {
+      props.loadPost(props.id)
     }
-  });
+  })
 
-  if (!props.articles_status) return null;
+  if (props.post_status === null) return 'loading...';
+
+  // ##### INIT END
 
 
-  /* ###  INIT END ### */
+  
+  const _POST = props.post;
+  const [category] = props.categories.filter(el => el.id == _POST.categories[0]);
+  const img = _POST._embedded['wp:featuredmedia'] ? _POST._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
 
-
-  let featured_id;
-  let article;
-
-  props.articles.map((el, i) => {
-    if (el.featured) {
-      if (!featured_id) {
-        featured_id = Infinity;
-      }
-
-      featured_id = Math.min(featured_id, el.id);
-    }
-  });
-
-  if (featured_id) {
-    article = props.articles.map(item => {
-      if (item.id == featured_id) {
-        const url = setUrl('article', {category: item.category, name: item.href});
-        const {id, title, preview, date, img} = item;
-
-        return (
-          <div key={id} className="latest">
-            <div className="container">
-              <div className="row">
-                <div className="col-6 pe-0">
-                  <div className="latest__wrap">
-                    <div className="latest__title">{title}</div>
-                    <div className="latest__content">{preview}</div>
-                    <div className="latest__bottom d-flex justify-content-between
-                    align-items-center">
-                      <div className="latest__date">{date}</div>
-                      <div className="latest__link">
-                        <Link to={url} className="article__link link">Read more</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 ps-0">
-                  <img src={img} alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-    });
-  } else {
-    return null;
+  const data = {
+    title: _POST.title.rendered,
+    content: parse(_POST.content.rendered),
+    date: _POST.date,
+    url: setUrl('post', {category: category.href, name: _POST.slug}),
+    img
   }
 
-  return (
-    <>
-      {article}
-    </>
-  )
+  return <Featured {...data} />
 }
+
+
+
+// ***** Redux
 
 function mapStateToProps(state) {
   return {
-    articles: state.articles.articles,
-    articles_status: state.articles.status,
+    post: state.top_article.post,
+    post_status: state.top_article.status,
+    categories: state.categories.categories
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadArticles: () => dispatch(actions.articles.loadArticles()),
+    loadPost: id => dispatch(actions.top_article.loadPost(id))
   }  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Featured);
+export default connect(mapStateToProps, mapDispatchToProps)(FeaturedContainer);

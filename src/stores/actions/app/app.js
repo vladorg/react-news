@@ -21,6 +21,13 @@ export const loadData = () => {
 
 
 
+
+
+
+
+//*********
+
+
 async function getData() {
   try {
     const menus = await API.getMenus();
@@ -34,39 +41,17 @@ async function getData() {
       }
     })
 
-    let {copy, logo, socials} = other.acf;
+    let {copy, logo, socials, top_post} = other.acf;
 
     return {
       nav,
       logo,
       socials: [...socials],
-      copy: {...copy[0]}
+      copy: {...copy[0]},
+      top_post
     }
   }
   catch(e) {
     throw e;
   }
-
-  // return {
-  //   logo: 'HotCoffee',
-  //   nav,
-  //   socials: [
-  //     {
-  //       img: '/images/icons/instagram.svg',
-  //       href: '#'
-  //     },
-  //     {
-  //       img: '/images/icons/twitter.svg',
-  //       href: '#'
-  //     },
-  //     {
-  //       img: '/images/icons/linkedin.svg',
-  //       href: '#'
-  //     }
-  //   ],
-  //   copy: {
-  //     main: 'hotcoffee',
-  //     sub: '2020 copyright all rights reserved'
-  //   },
-  // } 
 }

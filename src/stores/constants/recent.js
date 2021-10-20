@@ -1,0 +1,1 @@
+export const RECENT_LOAD = 'RECENT_LOAD';
