@@ -1,4 +1,5 @@
 import constants from '~s/constants';
+import * as API from '~ROOT/api';
 
 let NAMES = constants.banner;
 
@@ -22,10 +23,13 @@ export const loadBanner = () => {
 
 async function getBanner() {
   try {
+    const app = await API.getApp();
+    const {banner_title: title, banner_subtitle: subtitle, banner: img} = app.acf;
+
     return {
-      title: 'Make better coffee',
-      subtitle: 'why learn how to blog?',
-      img: '/images/croods1.png'
+      title,
+      subtitle,
+      img
     }
   }
   catch(e) {

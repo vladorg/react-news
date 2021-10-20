@@ -23,7 +23,7 @@ const Post = ({data, url, size}) => {
             <div className="post__preview">{preview}</div>
             <div className="post__bottom d-flex justify-content-between align-items-center">
               <div className="post__date">{date}</div>
-              <Link to={url} className="post__link link">Read more</Link>
+              <Link to={url} className="post__link link">Читать...</Link>
             </div>
           </div>
         </div>

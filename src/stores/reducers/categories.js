@@ -11,11 +11,14 @@ let NAMES = constants.categories;
 export default function(state = initialState, action) {
   
   switch(action.type) {
-    case NAMES.CATEGORIES_LOAD: // articles (array)
+    case NAMES.CATEGORIES_LOAD: // categories, status
+      const categories = action.categories || [];
+      const status = action.status || false;
+
       return {
         ...state,
-        status: action.status,
-        categories: [...action.categories]
+        status,
+        categories
       }
     default:
       return state;

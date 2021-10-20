@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import actions from '~s/actions';
+import Loader from '~c/loader';
 
 const Banner = props => {
 
@@ -10,7 +11,7 @@ const Banner = props => {
     }  
   });
 
-  if (!props.status) return null;
+  if (!props.status) return <Loader/>;
 
   let {title, subtitle, img, ...other} = props.data;
 

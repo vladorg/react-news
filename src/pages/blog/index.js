@@ -37,7 +37,7 @@ const BlogContainer = props => {
       <Blog heading={heading}>
         {
           props.posts_status === null
-          ? 'loading posts...'
+          ? 'Загрузка...'
           : <Posts posts={props.posts} size={4} container={false}/>
         }
       </Blog>

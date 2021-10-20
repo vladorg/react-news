@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './app';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '~/sass/main.sass';
+import '~ROOT/sass/main.sass';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';

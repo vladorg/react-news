@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Card from '~c/main/posts/card/index';
 import actions from '~s/actions';
 import List from './List.jsx';
+import Loader from '~c/loader';
 
 const PostsContainer = props => {  
 
@@ -20,6 +21,7 @@ const PostsContainer = props => {
 
   const [status, setStatus] = useState(null);
   const [data, setData] = useState([]);
+  const limit = 8;
 
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const PostsContainer = props => {
       setStatus(true);
     } else {
       if (props.recent_status === null) {
-        props.loadRecent(3);
+        props.loadRecent(limit);
       } else {
         setData(props.recent)
         setStatus(true);
@@ -38,7 +40,7 @@ const PostsContainer = props => {
 
   const {size, container, categories} = props;   
 
-  if (status === null) return 'loading posts...';
+  if (status === null) return <Loader/>;
 
   /* *** generate... *** */
   let posts = data.map(post => {

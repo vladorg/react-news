@@ -1,22 +1,27 @@
 import constants from '~s/constants';
-import * as API from '~/api';
+import * as API from '~ROOT/api';
 import actions from '~s/actions';
 
 let NAMES = constants.categories;
 
-export const loadCategories = (status) => {  
-  if (status) return {type: null}
-  
+export const loadCategories = () => {   
   return dispatch => {
-    loadCategoriesApi()
-      .then(categories => {
-        dispatch({
-          type: NAMES.CATEGORIES_LOAD,
-          categories,
-          status: true
+    return new Promise((res, rej) => {
+      loadCategoriesApi()
+        .then(categories => {
+          res(dispatch({
+            type: NAMES.CATEGORIES_LOAD,
+            categories,
+            status: true
+          }))
         })
-      })
-      .catch(e => rej(e)) 
+        .catch(e => {
+          dispatch({
+            type: NAMES.CATEGORIES_LOAD,
+            status: false
+          })
+        }) 
+    })    
   };
 }
 

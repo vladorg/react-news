@@ -12,7 +12,7 @@ let NAMES = constants.banner;
 export default function(state = initialState, action) {
   switch(action.type) {
     case NAMES.BANNER_LOAD: // data, status
-      let status = action.status || null;
+      let status = action.status || false;
       let data = action.data || {};
 
       return {

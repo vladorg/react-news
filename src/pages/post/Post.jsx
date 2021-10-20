@@ -25,7 +25,7 @@ const Post = ({title, date, category, img, content, url}) => {
           {content}
         </div>
         <hr/>
-        <Link className="btn btn-primary" to={url}>Back to category</Link>        
+        <Link className="btn btn-primary" to={url}>Назад в категорию</Link>        
       </div>
     </div>
   )

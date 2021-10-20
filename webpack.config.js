@@ -90,7 +90,7 @@ let conf = {
     },
     resolve: {
         alias: {
-            '~': path.resolve(__dirname, 'src/'),
+            '~ROOT': path.resolve(__dirname, 'src/'),
             '~c': path.resolve(__dirname, 'src/components'),
             '~s': path.resolve(__dirname, 'src/stores'),
             '~p': path.resolve(__dirname, 'src/pages'),

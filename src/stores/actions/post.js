@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 import constants from '~s/constants';
-import * as API from '~/api';
+import * as API from '~ROOT/api';
 
 let NAMES = constants.post;
 

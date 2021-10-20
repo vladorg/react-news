@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 import constants from '~s/constants';
-import * as API from '~/api';
+import * as API from '~ROOT/api';
 
 let NAMES = constants.recent;
 
@@ -31,8 +31,10 @@ async function load(limit) {
     let posts = data.map(item => {
       const img = item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
       const content = parse(item.content.rendered);
+      const preview = item.acf.preview ? parse(item.acf.preview) : null;
 
       return {
+        preview,
         id: item.id,
         title: item.title.rendered,
         preview: null,

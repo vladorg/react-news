@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import {routesList as routes} from '~r';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import {routesList as routes, routesMap} from '~r';
 
 import Header from '~c/header';
 import Footer from '~c/footer';
@@ -9,7 +9,6 @@ import ErrorLoad from '~c/errors/load';
 
 import { connect } from 'react-redux';
 import actions from '~s/actions';
-import * as API from '~/api';
 
 const App = props => {
 
@@ -29,12 +28,11 @@ const App = props => {
   return (
     <Router>
 
-      <button onClick={() => API.get()}>get</button>
-
       <Header data={props.main}/>
 
       <Switch>
         {routes}
+        <Redirect to={routesMap.page404}/>
       </Switch>
 
       <Footer data={props.main}/>
@@ -55,7 +53,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadData: () => dispatch(actions.app.loadData()),  
-    loadCategories: status => dispatch(actions.categories.loadCategories(status)),  
+    loadCategories: () => dispatch(actions.categories.loadCategories()),  
   }  
 }
 

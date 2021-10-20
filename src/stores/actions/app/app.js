@@ -1,5 +1,5 @@
 import constants from '~s/constants';
-import * as API from '~/api';
+import * as API from '~ROOT/api';
 
 let NAMES = constants.app;
 
@@ -14,7 +14,12 @@ export const loadData = () => {
             status: true
           }))
         })
-        .catch(e => rej(e))
+        .catch(e => {
+          dispatch({
+            type: NAMES.APP_LOAD,
+            status: false
+          })
+        })
     })
   }  
 }

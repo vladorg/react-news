@@ -21,15 +21,16 @@ const Categories = props => {
 
   const categories = props.default || props.categories;
   const wall = categories.map((category, i) => {
-    let url = setUrl('category', {category: category.href});
-    if (category.href == 'all') url = routesMap.blog;
+    if (category.href == 'all') return;
+
+    let url = setUrl('category', {category: category.href});    
 
     return (
       <NavLink 
         key={i} 
         to={url} 
         activeClassName="border-0 active" 
-        className="list-group-item list-group-item-action" 
+        className={"list-group-item list-group-item-action"} 
         exact
       >
         {category.placeholder}
@@ -40,6 +41,14 @@ const Categories = props => {
   
   return (
     <div className="list-group sticky-elem">
+      <NavLink 
+          to={routesMap.blog} 
+          activeClassName="border-0 active" 
+          className={"list-group-item list-group-item-action"} 
+          exact
+        >
+        Все статьи
+      </NavLink>
       {wall}
     </div>
   )

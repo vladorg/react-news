@@ -11,6 +11,8 @@ import parse from "html-react-parser";
 import {setUrl} from '~r';
 import actions from '~s/actions';
 import Featured from './Featured.jsx';
+import Loader from '~c/loader';
+import ErrorLoad from '~c/errors/load';
 
 const FeaturedContainer = props => {  
 
@@ -24,7 +26,8 @@ const FeaturedContainer = props => {
     }
   })
 
-  if (props.post_status === null) return 'loading...';
+  if (props.post_status === null) return <Loader/>;
+  if (props.post_status === false) return <ErrorLoad/>  
 
   // ##### INIT END
 
@@ -33,8 +36,10 @@ const FeaturedContainer = props => {
   const _POST = props.post;
   const [category] = props.categories.filter(el => el.id == _POST.categories[0]);
   const img = _POST._embedded['wp:featuredmedia'] ? _POST._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
+  const preview = _POST.acf.preview ? parse(_POST.acf.preview) : null;
 
   const data = {
+    preview,
     title: _POST.title.rendered,
     content: parse(_POST.content.rendered),
     date: _POST.date,

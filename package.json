@@ -3,7 +3,7 @@
   "jest": {
     "verbose": true,
     "moduleNameMapper": {
-      "^~/(.*)$": "<rootDir>/src$1",
+      "^~ROOT(.*)$": "<rootDir>/src$1",
       "^~c(.*)$": "<rootDir>/src/components$1",
       "^~s(.*)$": "<rootDir>/src/stores$1",
       "^~p(.*)$": "<rootDir>/src/pages$1",

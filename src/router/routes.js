@@ -5,8 +5,8 @@ import Blog from '~p/blog';
 import Post from '~p/post';
 import E404 from '~p/404';
 
-const ROOT = '/';
-//const ROOT = '/react_todo/';
+export const ROOT = '/';
+//export const ROOT = '/react_blog/';
 
 const routes = [
   {
@@ -37,8 +37,8 @@ const routes = [
 
   
   {
-    name: '404',
-    path: '**',    
+    name: 'page404',
+    path: `${ROOT}404`,    
     component: E404,
     exact: false,
     menu: false,

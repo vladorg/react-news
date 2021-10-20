@@ -7,10 +7,13 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import parse from "html-react-parser";
+import {Redirect} from 'react-router-dom';
 
 import {setUrl} from '~r';
 import actions from '~s/actions';
 import Post from './Post.jsx';
+import Loader from '~c/loader';
+import {routesMap} from '~r';
 
 
 const PostContainer = props => {
@@ -27,8 +30,8 @@ const PostContainer = props => {
     }
   }, []);
 
-  if (props.post_status === null) return 'loading...' ;
-  if (!props.post.id) return 'not found';
+  if (props.post_status === null) return <Loader/>;
+  if (!props.post.id) return <Redirect to={routesMap.page404}/>;
 
   const _POST = props.post;
   const [category] = props.categories.filter(el => el.id == _POST.categories[0]);
