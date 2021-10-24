@@ -68,7 +68,7 @@ describe('App reducer', () => {
 
     let newState = reducer(state, action);
 
-    expect(newState.status).toBeNull();
+    expect(newState.status).toBeFalsy();
 
   });
 
@@ -80,7 +80,7 @@ describe('App reducer', () => {
     let newState = reducer(state, action);
 
     expect(newState.data).toEqual({});
-    expect(newState.status).toBeNull();
+    expect(newState.status).toBeFalsy();
 
   });
 

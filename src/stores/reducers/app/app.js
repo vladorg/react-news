@@ -7,8 +7,6 @@ let initialState = {
 
 let NAMES = constants.app;
 
-
-
 export default function(state = initialState, action) {
   switch(action.type) {
     case NAMES.APP_LOAD: // data, status

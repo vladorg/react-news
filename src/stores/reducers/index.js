@@ -7,6 +7,7 @@ import categories from './categories';
 import post from './post';
 import top_article from './top_article';
 import recent from './recent';
+import search from './search/search';
 
 export default combineReducers({
   posts,
@@ -15,6 +16,7 @@ export default combineReducers({
   categories,
   post,
   top_article,
-  recent
+  recent,
+  search
 });
 

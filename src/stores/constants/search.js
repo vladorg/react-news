@@ -1,0 +1,2 @@
+export const POSTS_SEARCH = 'POSTS_SEARCH';
+export const POSTS_SEARCH_CLEAR = 'POSTS_SEARCH_CLEAR';

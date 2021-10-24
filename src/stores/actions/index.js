@@ -5,6 +5,7 @@ import * as categories from './categories';
 import * as post from './post';
 import * as top_article from './top_article';
 import * as recent from './recent';
+import * as search from './search';
 
 export default {
   posts,
@@ -13,5 +14,6 @@ export default {
   categories,
   post,
   top_article,
-  recent
+  recent,
+  search
 }
