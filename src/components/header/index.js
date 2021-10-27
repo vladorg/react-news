@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from '~c/ui/Search';
+import Search from '~c/ui/search/';
 import Navigation from '~c/ui/navigation';
 import Socials from '~c/ui/socials';
 import { withRouter } from 'react-router';

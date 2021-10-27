@@ -37,6 +37,8 @@ const FeaturedContainer = props => {
   const [category] = props.categories.filter(el => el.id == _POST.categories[0]);
   const img = _POST._embedded['wp:featuredmedia'] ? _POST._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
   const preview = _POST.acf.preview ? parse(_POST.acf.preview) : null;
+  const categoryName = category.placeholder;
+  const categoryUrl = setUrl('category', {category: category.href});
 
   const data = {
     preview,
@@ -44,7 +46,9 @@ const FeaturedContainer = props => {
     content: parse(_POST.content.rendered),
     date: _POST.date,
     url: setUrl('post', {category: category.href, name: _POST.slug}),
-    img
+    img,
+    categoryName,
+    categoryUrl
   }
 
   return <Featured {...data} />

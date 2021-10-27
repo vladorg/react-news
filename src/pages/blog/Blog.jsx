@@ -15,7 +15,7 @@ const Blog = ({heading, children: posts}) => {
         <h1 className="mb-4">{heading}</h1>
         <div className="row">
           <div className="col-9">
-            {posts}            
+            {posts}           
           </div>
           <div className="col-3">
             <Categories/>

@@ -1,7 +1,7 @@
 import request from "./request";
 
-// const base = 'http://wp-api/wp-json/';
-const base = 'http://w99762ln.beget.tech/wp-rest-blog/wp-json/';
+ const base = 'http://wp-api/wp-json/';
+//const base = 'http://w99762ln.beget.tech/wp-rest-blog/wp-json/';
 
 
 export function getCategories() {
@@ -11,15 +11,16 @@ export function getCategories() {
 
 // Posts
 
-export function getPosts() {
-  return request(`${base}wp/v2/posts/?_embed`)
-}
+export function getPosts(categoryId, limit = 99) {
+  let url;
 
-export function getPostsByCategory(categoryId) {
-	const id = categoryId;
-	const url = id ? `${base}wp/v2/posts/?_embed&categories=${id}` : `${base}wp/v2/posts/?_embed`;
+  if (categoryId) {
+    url = `${base}wp/v2/posts/?_embed&categories=${categoryId}&per_page=${limit}`;
+  } else {
+    url = `${base}wp/v2/posts/?_embed&per_page=${limit}`;
+  }
 
-  return request(url);
+  return request(url)
 }
 
 export function getPostByName(slug) {
@@ -46,7 +47,8 @@ export function getApp() {
 }
 
 export function search(text) {
-  return request(`${base}wp/v2/search?subtype=post&search=${text}&_embed`)
+  // wp/v2/search?subtype=post&search=${text}&_embed
+  return request(`${base}relevanssi/v1/search?keyword=${text}&type=post`)
 }
 
 

@@ -19,16 +19,19 @@ import {routesMap} from '~r';
 const PostContainer = props => {
 
   const slug = props.match.params.name;
+  
 
   useEffect(() => {    
     if (props.post_status === null) {
       props.load(slug);
-    }
-    
+    }    
+  });
+
+  useEffect(() => {   
     return () => {
       props.clear();
     }
-  }, []);
+  }, [slug]);
 
   if (props.post_status === null) return <Loader/>;
   if (!props.post.id) return <Redirect to={routesMap.page404}/>;
@@ -46,6 +49,8 @@ const PostContainer = props => {
     url: setUrl('category', {category: category.href})
   }
 
+  window.scrollTo({top: 0,behavior: "smooth"});
+
   return <Post {...data}/>
 }
 
@@ -54,7 +59,8 @@ function mapStateToProps(state) {
   return {
     post: state.post.post,
     post_status: state.post.status,
-    categories: state.categories.categories
+    categories: state.categories.categories,
+    search_status: state.search.status
   }
 }
 

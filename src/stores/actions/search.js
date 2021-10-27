@@ -7,11 +7,11 @@ export const searchPosts = text => {
   return dispatch => {
     return new Promise((res, rej) => {
       search(text)
-        .then(data => {
+        .then(posts => {
           res(dispatch({
             type: NAMES.POSTS_SEARCH,
             payload: {
-              posts: data.data,
+              posts,
               status: true
             }
           }));
@@ -33,13 +33,20 @@ export const clearPosts = () => {
 
 async function search(text) {
   try {
-    const data = await API.search(text);
+    const search = await API.search(text);
 
-    return {
-      data
-    }
+    if (!Array.isArray(search)) return [];
+
+    const posts = search.map(el => {
+      return {
+        title: el.title.rendered,
+        id: el.id,
+        slug: el.slug,
+        categoryId: el.categories[0]
+      }
+    });
+
+    return posts;
   }
-  catch(e) {
-    throw e
-  }
+  catch(e) {}
 }
