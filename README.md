@@ -24,3 +24,5 @@ Clone this repo or download Zip and extract, then do it:
 or
 - run - "npm run b" for building project
 ```
+
+You can get in trouble when project will be started with error in data loading. If it is happened - disable Addblock extension
