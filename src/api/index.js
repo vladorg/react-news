@@ -1,7 +1,7 @@
 import request from "./request";
 
- const base = 'http://wp-api/wp-json/';
-//const base = 'http://w99762ln.beget.tech/wp-rest-blog/wp-json/';
+ //const base = 'http://wp-api/wp-json/';
+const base = 'http://w99762ln.beget.tech/wp-rest-blog/wp-json/';
 
 
 export function getCategories() {
@@ -48,7 +48,7 @@ export function getApp() {
 
 export function search(text) {
   // wp/v2/search?subtype=post&search=${text}&_embed
-  return request(`${base}relevanssi/v1/search?keyword=${text}&type=post`)
+  return request(`${base}wp/v2/posts?search=${text}&_embed`)
 }
 
 

@@ -14,22 +14,6 @@ const routesList = routes.map(route => {
   )
 });
 
-// const navList = routes.map(route => {
-//   if (route.menu) {
-//     return (
-//       <NavLink 
-//         key={route.name}
-//         to={route.path}
-//         activeClassName="disabled" 
-//         className="btn btn-dark"
-//         exact
-//       >
-//         {route.placeholder}
-//       </NavLink>
-//     )
-//   }  
-// });
-
 let routesMap = {};
 routes.map(route => {
   routesMap[route.name] = route.path;

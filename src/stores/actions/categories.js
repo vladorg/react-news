@@ -37,7 +37,9 @@ async function loadCategoriesApi() {
       return {
         id: el.id,
         href: el.slug,
-        placeholder: el.name
+        placeholder: el.name,
+        description: el.description,
+        thumb: el.acf.thumb
       }
     });
 

@@ -19,6 +19,7 @@ const searchContainer = props => {
   const blurHandler = e => {
     setTimeout(() => {
       props.clearPosts();
+      e.target.value = '';
     }, 100)
   }
 
@@ -35,7 +36,10 @@ const searchContainer = props => {
 
       return (
         <li key={post.id}>
-          <Link to={url}>{post.title}</Link>
+          <Link to={url}>
+            <img width="50" height="50" src={post.img} alt=""/>
+            {post.title}
+          </Link>
         </li>
       )
     })
@@ -52,6 +56,9 @@ const searchContainer = props => {
 
   return <Search {...data} />
 }
+
+
+// *** Redux
 
 function mapStateToProps(state) {
   return {

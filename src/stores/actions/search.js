@@ -38,11 +38,14 @@ async function search(text) {
     if (!Array.isArray(search)) return [];
 
     const posts = search.map(el => {
+      const img = el._embedded['wp:featuredmedia'] ? el._embedded['wp:featuredmedia']['0'].source_url : '/images/no_img.png';
+
       return {
         title: el.title.rendered,
         id: el.id,
         slug: el.slug,
-        categoryId: el.categories[0]
+        categoryId: el.categories[0],
+        img
       }
     });
 
